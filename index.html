@@ -187,7 +187,9 @@
     .input-field::placeholder {
         color: #90949c;
     }
-
+    .input-field:focus::placeholder {
+        color: #b5b4b4; /* 當輸入框獲得焦點時，隱藏提示文字 */
+    }
     .input-field:focus {
         outline: none; /* 先移除預設的藍框（不同瀏覽器有差） */
         border: 1px solid #1877f2; /* Facebook 藍色 */
@@ -207,7 +209,7 @@
     }
 
     .login-button:hover {
-        background-color: #165cdb;
+        background-color: #1877f2;
     }
 
     .forgot-password {
