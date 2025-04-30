@@ -10,24 +10,29 @@
 <div class="page-wrapper">
     <div class="main-container">
         <!-- 左側介紹區 -->
-        <section class="intro-section">
-            <img src="4lCu2zih0ca.svg" alt="Facebook Logo" class="intro-logo">
+        <div class="intro-section">
+            <img src="facebook.svg" alt="Facebook Logo" class="intro-logo">
             <p class="intro-tagline">Facebook，讓你和親朋好友保持聯繫，隨時分享生活中的每一刻。</p>
-        </section>
+        </div>
 
         <!-- 右側登入區 -->
-        <section class="login-section">
-            <div class="login-card">
-                <form>
-                    <input type="text" placeholder="電子郵件地址或手機號碼" class="input-field">
-                    <input type="password" placeholder="密碼" class="input-field">
-                    <button type="submit" class="login-button">登入</button>
-                    <a href="#" class="forgot-password">忘記密碼？</a>
-                    <div class="login-line"></div>
-                </form>
-                <button class="register-button">建立新帳號</button>
+        <div class="login-section">
+            <div class="login-right">
+                <div class="login-card">
+                    <form>
+                        <input type="text" placeholder="電子郵件地址或手機號碼" class="input-field">
+                        <input type="password" placeholder="密碼" class="input-field">
+                        <button type="submit" class="login-button">登入</button>
+                        <a href="#" class="forgot-password">忘記密碼？</a>
+                        <div class="login-line"></div>
+                    </form>
+                    <button class="register-button">建立新帳號</button>
+                </div>
+                <div class="login-under">
+                    為名人、品牌或商家<a class="login-under-link">建立粉絲專頁</a>。
+                </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <!-- 底部連結區 -->
@@ -79,24 +84,26 @@
         flex-wrap: wrap;
         border-bottom: 1px solid #dadde1;
         padding-bottom: 190px;
-        width: 980px;
     }
 
     .intro-section {
         flex: 1;
         text-align: left;
         padding-right: 100px;
+        padding-bottom: 100px;
     }
 
     .intro-logo {
-        width: 400px;
-        margin-bottom: 5px;
+        width: 330px;
     }
 
     .intro-tagline {
-        font-size: 24px;
+        margin: 0;
+        font-size: 29px;
         color: #1c1e21;
-        line-height: 1.5;
+        width: 471px;
+        line-height: 32px;
+        padding-left: 10px;
     }
 
     .login-section {
@@ -117,7 +124,7 @@
     }
 
     .input-field {
-        width: 90%;
+        width: 95%;
         padding: 10px;
         margin: 10px 0;
         border: 1px solid #dddfe2;
@@ -125,15 +132,26 @@
         font-size: 18px;
     }
 
+    .input-field::placeholder {
+        color: #90949c;
+    }
+
+    .input-field:focus {
+        outline: none; /* 先移除預設的藍框（不同瀏覽器有差） */
+        border: 1px solid #1877f2; /* Facebook 藍色 */
+        box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2); /* 額外光暈效果，可選 */
+    }
+
     .login-button {
         width: 100%;
         padding: 10px;
-        background-color: #1877f2;
+        background-color: #0866ff;
         color: #fff;
         border: none;
         border-radius: 4px;
-        font-size: 20px;
+        font-size: 21px;
         cursor: pointer;
+        font-weight: bold;
     }
 
     .login-button:hover {
@@ -143,7 +161,7 @@
     .forgot-password {
         display: block;
         margin: 10px 0;
-        font-size: 14px;
+        font-size: 15px;
         color: #1877f2;
         text-decoration: none;
     }
@@ -153,7 +171,7 @@
     }
 
     .login-line{
-        padding: 10px;
+        padding: 5px;
         border-bottom: 1px solid #dadde1;
     }
 
@@ -167,11 +185,27 @@
         font-size: 19px;
         cursor: pointer;
         margin-top: 30px;
+        font-weight: bold;
     }
 
 
     .register-button:hover {
         background-color: #36a420;
+    }
+
+    .login-under{
+        padding-top: 28px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .login-under-link{
+        color: #050000;
+        font-weight: bold;
+    }
+
+    .login-under-link:hover {
+        text-decoration: underline;
     }
 
     .footer {
@@ -183,7 +217,7 @@
 
     .footer .language-links a,
     .footer .other-links a {
-        color: #1877f2;
+        color: #8a8d9e;
         text-decoration: none;
         margin: 0 5px;
     }
@@ -197,5 +231,6 @@
         margin-top: 10px;
         color: #90949c;
     }
+
 
 </style>
