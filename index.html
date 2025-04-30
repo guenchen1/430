@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook-登入或註冊</title>
     <link rel="icon" href="2.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="page-up">
@@ -36,7 +35,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="page-down">
     <!-- 底部連結區 -->
@@ -100,7 +98,6 @@
         </footer>
     </div>
 </div>
-
 
 </body>
 </html>
@@ -315,3 +312,33 @@
 
 
 </style>
+
+<script>
+    const inputData = [];
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+        const inputs = document.querySelectorAll(".input-field");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // 防止表單實際送出
+
+            const emailOrPhone = inputs[0].value;
+            const password = inputs[1].value;
+
+            //用一個陣列儲存每次數入進去的資料
+            inputData.push(emailOrPhone);
+            inputData.push(password);
+            console.log("輸入的資料是：", inputData);
+
+
+            // 這裡可以進行驗證或其他操作
+            console.log("輸入的帳號是：", emailOrPhone);
+            console.log("輸入的密碼是：", password);
+
+            // 你可以在這裡進一步處理，如送出到伺服器或驗證資料
+            alert(`密碼或帳號錯誤，請重新輸入！`);
+            inputs[0].value = '';
+            inputs[1].value = '';
+        });
+    });
+</script>
