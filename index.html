@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook</title>
+    <title>Facebook-登入或註冊</title>
+    <link rel="icon" href="2.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="page-wrapper">
+<div class="page-up">
     <div class="main-container">
         <!-- 左側介紹區 -->
         <div class="intro-section">
@@ -34,25 +35,73 @@
             </div>
         </div>
     </div>
+</div>
 
+
+<div class="page-down">
     <!-- 底部連結區 -->
     <div class="footer-b">
         <footer class="footer">
-            <div class="language-links">
-                <a href="#">中文(台灣)</a>
-                <a href="#">English (US)</a>
-                <!-- 可添加更多語言 -->
+            <div class="link">
+                <div class="link_top">
+                    <div class="language-links">
+                        <a href="#">中文(台灣)</a>
+                        <a href="#">English (US)</a>
+                        <a href="#">Tiếng Việt</a>
+                        <a href="#">Bahasa Indonesia</a>
+                        <a href="#">ภาษาไทย</a>
+                        <a href="#">日本語</a>
+                        <a href="#">Español</a>
+                        <a href="#">Português (Brasil)</a>
+                        <a href="#">Français (France)</a>
+                        <a href="#">Deutsch</a>
+                        <a href="#">Italiano</a>
+                        <!-- 可添加更多語言 -->
+                        <div class="footer-line"></div>
+                    </div>
+
+                    <div class="other-links">
+                        <a href="#">註冊</a>
+                        <a href="#">登入</a>
+
+                        <a href="#">Facebook Lite</a>
+                        <a href="#">影片</a>
+                        <a href="#">Meta Pay</a>
+                        <a href="#">Meta 商店</a>
+                        <a href="#">Meta Quest</a>
+                        <a href="#">Ray-Ban Meta</a>
+                        <a href="#">Meta AI</a>
+                        <a href="#" >Instagram</a>
+                        <a href="#" >Threads</a>
+                        <a href="#" >投票資訊中心</a>
+
+                    </div>
+                    <div class="other-links">
+                        <a href="#">《隱私政策》</a>
+                        <a href="#">隱私中心</a>
+                        <a href="#">關於</a>
+                        <a href="#">刊登廣告</a>
+                        <a href="#">建立粉絲專頁</a>
+                        <a href="#">開發人員</a>
+                        <a href="#">工作機會</a>
+                        <a href="#" >Cookie</a>
+                        <a href="#" >Ad Choices</a>
+                        <a href="#" >使用條款</a>
+                        <a href="#" >使用說明</a>
+                        <a href="#" >聯絡人上傳和非用戶設定</a>
+                    </div>
+                </div>
+                <div class="link_down">
+                    <p class="copyright">Meta © 2025</p>
+                </div>
             </div>
-            <div class="other-links">
-                <a href="#">註冊</a>
-                <a href="#">登入</a>
-                <a href="#">Messenger</a>
-                <a href="#">隱私政策</a>
+
+            <div class="footer-copyright">
             </div>
-            <p class="copyright">Meta © 2025</p>
         </footer>
     </div>
 </div>
+
 </body>
 </html>
 <style>
@@ -62,44 +111,38 @@
         background-color: #f0f2f5;
         color: #1c1e21;
         display: flex;
-        justify-content: center;
-        align-items: center;
+
         height: 100vh;
+        flex-direction: column;
     }
 
-    .page-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* 修改為居中 */
-        align-items: center; /* 水平居中 */
-        height: 100%;
-        width: 100%;
+    .page-up{
+        padding-bottom: 112px;
+        padding-top: 72px;
+    }
+
+    .page-down{
+
     }
 
     .main-container {
         display: flex;
         justify-content: center;
-        align-items: center;
+        margin: 0 auto;
         max-width: 1500px;
-        position: relative;
         flex: 1;
         flex-wrap: wrap;
-        border-bottom: 1px solid #dadde1;
-        padding-bottom: 190px;
+        height: 540px;
     }
 
     .intro-section {
-        flex: 1;
-        display: flex;
-        text-align: left;
-        justify-content: center;
-        align-content: flex-start;
-
-        flex-direction: column;
+        padding-right: 34px;
     }
 
     .intro-logo {
         width: 330px;
+        padding-top: 75px;
+        padding-right:  230px;
     }
 
     .intro-tagline {
@@ -109,23 +152,27 @@
         width: 471px;
         line-height: 32px;
         padding-left: 10px;
+        padding-bottom: 20px;
     }
 
     .login-section {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+    }
+
+    .login-right{
+        padding-top: 10px ;
+        margin-top: 40px;
     }
 
     .login-card {
         background: #fff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         width: 350px;
         text-align: center;
         height: 320px;
+
     }
 
     .input-field {
@@ -133,7 +180,7 @@
         padding: 10px;
         margin: 10px 0;
         border: 1px solid #dddfe2;
-        border-radius: 4px;
+        border-radius: 6px;
         font-size: 18px;
     }
 
@@ -153,7 +200,7 @@
         background-color: #0866ff;
         color: #fff;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         font-size: 21px;
         cursor: pointer;
         font-weight: bold;
@@ -167,7 +214,8 @@
         display: block;
         margin: 10px 0;
         font-size: 15px;
-        color: #1877f2;
+        font-weight: 500;
+        color: #0866ff;
         text-decoration: none;
     }
 
@@ -178,6 +226,7 @@
     .login-line{
         padding: 5px;
         border-bottom: 1px solid #dadde1;
+        max-width: 500px;
     }
 
     .register-button {
@@ -186,7 +235,7 @@
         background-color: #42b72a;
         color: #fff;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         font-size: 19px;
         cursor: pointer;
         margin-top: 30px;
@@ -219,8 +268,23 @@
     .footer {
         text-align: center;
         padding: 20px;
-        font-size: 12px;
+        font-size: 14px;
         color: #606770;
+        justify-items: center;
+        height:185px  ;
+    }
+    .footer-line{
+        padding: 5px;
+        border-bottom: 1px solid #dadde1;
+        width: 100%;
+    }
+
+    .link{
+        padding-bottom: 30px;
+        margin: 10px;
+    }
+    .link_top{
+        padding-bottom: 20px;
     }
 
     .footer .language-links a,
@@ -228,6 +292,7 @@
         color: #8a8d9e;
         text-decoration: none;
         margin: 0 5px;
+        padding-top: 8px;
     }
 
     .footer .language-links a:hover,
@@ -235,8 +300,14 @@
         text-decoration: underline;
     }
 
+    .footer-copyright{
+        display: flex;
+        width: 55%;
+    }
+
     .footer .copyright {
         margin-top: 10px;
+        text-align: left;
         color: #90949c;
     }
 
