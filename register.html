@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>尋找你的帳號</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- 放在 <body> 最上方 -->
+<div class="top-bar">
+    <div class="top-left">
+        <img src="smalllogo.png" alt="Logo" class="top-logo">
+    </div>
+    <div class="top-right">
+        <input type="text" class="top-input" placeholder="電子郵件地址或手機號碼">
+        <input type="password" class="top-input" placeholder="密碼">
+        <button class="top-login-btn">登入</button>
+        <a href="#" class="top-forgot">忘記帳號？</a>
+    </div>
+</div>
+<div class="register-container">
+    <div class="register-title">尋找你的帳號</div>
+    <div class="login-line"></div>
+    <div class="register-desc">請輸入你的電子郵件地址或手機號碼以搜尋帳號。</div>
+    <input class="register-input" type="text" placeholder="電子郵件地址或手機號碼">
+    <div class="login-line"></div>
+    <div class="register-actions">
+        <button class="cancel-btn" onclick="window.location.href='index.html'">取消</button>
+        <button class="register-btn">搜尋</button>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer-words">
+        <div class="footer-langs">
+            中文(台灣) English (US) Tiếng Việt Bahasa Indonesia ภาษาไทย 日本語 Español Português (Brasil) Français (France) Deutsch Italiano +
+            <div class="login-line"></div>
+        </div>
+
+        <div class="footer-links">
+            註冊　登入　Messenger　Facebook Lite　影片　Meta Pay　Meta 商店　Meta Quest　Ray-Ban Meta　Meta AI　Instagram　Threads　投票資訊中心
+            <br>
+            隱私政策　隱私中心　關於　刊登廣告　建立粉絲專頁　開發人員　工作機會　Cookie　Ad Choices　使用條款　使用說明　聯絡人上傳和非用戶
+        </div>
+        <div class="footer-meta">
+            Meta © 2025
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+<style>
+    body { background: #f0f2f5; margin: 0; }
+    .register-container {
+        margin: 80px auto 0;
+        width: 500px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 30px 24px 24px 24px;
+    }
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        padding: 0 32px;
+    }
+    .top-left {
+        display: flex;
+        align-items: center;
+    }
+    .top-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .top-logo {
+        height: 48px;
+    }
+    .top-input {
+        padding: 8px 12px;
+        font-size: 16px;
+        width: 165px;
+        border: 1px solid #ccd0d5;
+        border-radius: 6px;
+        margin-right: 8px;
+    }
+    .top-input {
+        padding: 8px 12px;
+        font-size: 15px;
+        border: 1px solid #ccd0d5;
+        border-radius: 6px;
+        margin-right: 8px;
+    }
+
+    .top-input::placeholder {
+        color: #5c5c5c; /* 深色 */
+        opacity: 1;
+    }
+    .top-input:focus::placeholder {
+        color: #b5b4b4 ; /* 淺色 */
+    }
+    .top-input:focus {
+        border: 1.5px solid #1877f2; /* Facebook 藍色 */
+        box-shadow: 0 0 0 2px rgba(24,119,242,0.15);
+        outline: none;
+    }
+    .top-login-btn {
+        background: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 15px;
+        font-weight: bold;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .top-forgot {
+        color: #1877f2;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .register-title { font-size: 21px; font-weight: bold;margin-bottom: 10px }
+    .register-desc { margin-bottom: 16px;
+    font-size: 18px; color: #070707;
+     }
+    .register-input { width: 95%; padding: 17px; font-size: 17px;  border: 1px solid #ccd0d5; border-radius: 6px;margin-bottom: 10px }
+    .register-actions { text-align: right;
+    margin-top: 15px; }
+    .register-btn, .cancel-btn {
+        padding: 6px 17px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 8px;
+        cursor: pointer;
+
+    }
+    .register-btn { background: #1877f2; color: #fff;font-size: 16px; }
+    .cancel-btn { background: #e4e6eb; color: #050505; font-size: 16px;}
+    .footer {
+        position: fixed;
+        height: 400px;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        color: #737373;
+        font-size: 13px;
+        text-align: center;
+        padding: 32px 0 16px 0;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+        z-index: 100;
+    }
+    .footer-words{
+        padding-top: 180px;
+    }
+    .footer-langs, .footer-links, .footer-meta {
+        margin-bottom: 8px;
+    }
+    .footer-links{
+        margin-top: 10px;
+    }
+</style>
+<script>
+    document.querySelector('.register-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('搜尋失敗，請嘗試重新登入');
+        window.location.href = 'index.html';
+    });
+</script>
