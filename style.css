@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: SFProDisplay-Regular, Helvetica, Arial, "hiragino kaku gothic pro", meiryo, "ms pgothic", sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     background-color: #f0f2f5;
     color: #1c1e21;
     display: flex;
@@ -38,6 +38,7 @@ body {
 }
 
 .intro-tagline {
+    font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
     margin: 0;
     font-size: 29px;
     color: #1c1e21;
