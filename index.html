@@ -104,6 +104,11 @@
 </html>
 
 <script>
+    document.querySelector('.forgot-password').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'register.html';
+    });
+
     const inputData = [];
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.querySelector("form");
