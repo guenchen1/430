@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook - 註冊</title>
+    <link rel="icon" href="2.png" type="image/x-icon">
+    <style>
+        body {
+            background: #f0f2f5;
+            margin: 0;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        .fb-logo {
+            display: block;
+            margin: 0px auto 0px auto;
+            width: 320px;
+            padding-top: 10px;
+        }
+        .register-container {
+            background: #fff;
+            width: 432px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 5px 16px 5px 16px;
+
+        }
+        .register-title {
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .register-desc {
+            color: #606770;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .register-row {
+            display: flex;
+            gap: 8px;
+        }
+        .register-form input, .register-form select {
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            background: #fff;
+            outline: none;
+            width: 95%;
+        }
+        .register-form select {
+            width: 100%;
+        }
+        .register-label {
+            font-size: 12px;
+            color: #606770;
+            margin-bottom: 2px;
+        }
+        .gender-row {
+            display: flex;
+            gap: 8px;
+        }
+        .gender-option {
+            flex: 1;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            flex-direction: row; /* 讓 radio 在左、文字在右 */
+            gap: 56px;
+            height: 20px;
+        }
+        .gender-option input {
+            width: 13px;
+            height: 13px;
+            padding: 0;
+
+            font-size: initial;
+        }
+        .register-tip {
+            font-size: 12px;
+            color: #777;
+            margin: 8px 0 0 0;
+        }
+        .register-tip a {
+            color: #385898;
+            text-decoration: none;
+            cursor: default;
+            transition: color 0.2s;
+        }
+        .register-tip a:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .register-btn {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            background: #00a400;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 0;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 200px;
+            height: 45px;
+        }
+        .register-btn:hover {
+            background: #009000;
+        }
+        .register-form input:focus, .register-form select:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px #020000; /* 可選：加藍色陰影更像 Facebook */
+            border-color: #070707;
+        }
+        .register-form input.touched:invalid,
+        .register-form select.touched:invalid {
+            border-color: #e53935;
+            box-shadow: 0 0 0 1.5px #e53935;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="red" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 18px 18px;
+        }
+        .login-link {
+            display: block;
+            text-align: center;
+            color: #1877f2;
+            font-size: 16px;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+        .login-link:hover {
+            cursor: pointer;
+        }
+        .footer-b{
+            width: 100%;
+            background-color: #ffffff;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #606770;
+            justify-items: center;
+            height: 170px;
+        }
+        .footer-line{
+            padding: 5px;
+            border-bottom: 1px solid #dadde1;
+            width: 100%;
+        }
+
+        .link{
+            padding-bottom: 30px;
+            margin: 10px;
+            font-size: 13px;
+            line-height: 1.8
+        }
+        .link_top{
+            padding-bottom: 20px;
+        }
+
+        .footer .language-links a,
+        .footer .other-links a {
+            color: #385898;
+            text-decoration: none;
+            margin: 0 5px;
+            padding-top: 8px;
+        }
+
+        .footer .language-links a:hover,
+        .footer .other-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copyright{
+            display: flex;
+            width: 55%;
+        }
+
+        .footer .copyright {
+            margin-top: 10px;
+            text-align: left;
+            color: #90949c;
+        }
+    </style>
+</head>
+<body>
+<img src="facebook.svg" alt="Facebook" class="fb-logo">
+<div class="register-container">
+    <div class="register-title">建立新帳號</div>
+    <div class="register-desc">快速又簡單。</div>
+    <form class="register-form">
+        <div class="register-row">
+            <input type="text" placeholder="姓氏" required>
+            <input type="text" placeholder="名字" required>
+        </div>
+        <div class="register-label">出生日期 <span title="為什麼我需要提供這些資訊？">?</span></div>
+        <div class="register-row">
+            <select required>
+                ion>2025</option>
+                <option>2024</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>2015</option>
+                <option>2014</option>
+                <option>2013</option>
+                <option>2012</option>
+                <option>2011</option>
+                <option>2010</option>
+                <option>2009</option>
+                <option>2008</option>
+                <option>2007</option>
+                <option>2006</option>
+                <option>2005</option>
+                <option>2004</option>
+                <option>2003</option>
+                <option>2002</option>
+                <option>2001</option>
+                <option>2000</option>
+                <!-- ... -->
+            </select>
+            <select required>
+                <option>1月</option><option>2月</option>
+                <option>3月</option><option>4月</option>
+                <option>5月</option><option>6月</option>
+                <option>7月</option><option>8月</option>
+                <option>9月</option><option>10月</option>
+                <option>11月</option><option>12月</option>
+                <!-- ... -->
+            </select>
+            <select required>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+                <option>26</option>
+                <option>27</option>
+                <option>28</option>
+                <option>29</option>
+                <!-- ... -->
+            </select>
+        </div>
+        <div class="register-label">性別 <span title="為什麼我需要提供這些資訊？">?</span></div>
+        <div class="gender-row">
+            <label class="gender-option">女性<input type="radio" name="gender" required></label>
+            <label class="gender-option">男性<input type="radio" name="gender"></label>
+            <label class="gender-option">自訂<input type="radio" name="gender"></label>
+        </div>
+        <input id="account" type="text" placeholder="手機號碼或電子郵件地址" required>
+        <input id="password" type="password" placeholder="設定密碼" required>
+        <div class="register-tip">
+            使用我們服務的用戶可能已上傳你的聯絡資料到 Facebook。<a href="#"> 瞭解詳情</a>。<br>
+            點擊「註冊」即表示你同意我們的<a href="#">《服務條款》</a>、<a href="#">《隱私政策》</a>和<a href="#">《Cookie 政策》</a>。你可能會收到我們的簡訊通知，你隨時可選擇停止接收。
+        </div>
+        <button type="submit" class="register-btn">註冊</button>
+        <a href="index.html" class="login-link">已經有帳號了？</a>
+    </form>
+</div>
+<div class="page-down">
+    <!-- 底部連結區 -->
+    <div class="footer-b">
+        <footer class="footer">
+            <div class="link">
+                <div class="link_top">
+                    <div class="language-links">
+                        <a href="#">中文(台灣)</a>
+                        <a href="#">English (US)</a>
+                        <a href="#">Tiếng Việt</a>
+                        <a href="#">Bahasa Indonesia</a>
+                        <a href="#">ภาษาไทย</a>
+                        <a href="#">日本語</a>
+                        <a href="#">Español</a>
+                        <a href="#">Português (Brasil)</a>
+                        <a href="#">Français (France)</a>
+                        <a href="#">Deutsch</a>
+                        <a href="#">Italiano</a>
+                        <!-- 可添加更多語言 -->
+                        <div class="footer-line"></div>
+                    </div>
+
+                    <div class="other-links">
+                        <a href="#">註冊</a>
+                        <a href="#">登入</a>
+
+                        <a href="#">Facebook Lite</a>
+                        <a href="#">影片</a>
+                        <a href="#">Meta Pay</a>
+                        <a href="#">Meta 商店</a>
+                        <a href="#">Meta Quest</a>
+                        <a href="#">Ray-Ban Meta</a>
+                        <a href="#">Meta AI</a>
+                        <a href="#" >Instagram</a>
+                        <a href="#" >Threads</a>
+                        <a href="#" >投票資訊中心</a>
+
+                    </div>
+                    <div class="other-links">
+                        <a href="#">《隱私政策》</a>
+                        <a href="#">隱私中心</a>
+                        <a href="#">關於</a>
+                        <a href="#">刊登廣告</a>
+                        <a href="#">建立粉絲專頁</a>
+                        <a href="#">開發人員</a>
+                        <a href="#">工作機會</a>
+                        <a href="#" >Cookie</a>
+                        <a href="#" >Ad Choices</a>
+                        <a href="#" >使用條款</a>
+                        <a href="#" >使用說明</a>
+                        <a href="#" >聯絡人上傳和非用戶設定</a>
+                    </div>
+                </div>
+                <div class="link_down">
+                    <p class="copyright">Meta © 2025</p>
+                </div>
+            </div>
+
+            <div class="footer-copyright"></div>
+        </footer>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    document.querySelectorAll('.register-form input, .register-form select').forEach(el => {
+        el.addEventListener('blur', function() {
+            this.classList.add('touched');
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector(".register-form");
+        const accountInput = document.getElementById("account");
+        const passwordInput = document.getElementById("password");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const emailOrPhone = accountInput.value;
+            const password = passwordInput.value;
+
+            console.log("帳號：", emailOrPhone);
+            console.log("密碼：", password);
+
+            alert(`註冊失敗 ！`);
+            // 清空欄位
+            accountInput.value = '';
+            passwordInput.value = '';
+        });
+    });
+</script>
