@@ -115,30 +115,81 @@
 
     const inputData = [];
     document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector("form");
-        const inputs = document.querySelectorAll(".input-field");
+        const translations = {
+            'zh-TW': {
+                tagline: 'Facebook，讓你和親朋好友保持聯繫，隨時分享生活中的每一刻。',
+                emailPlaceholder: '電子郵件地址或手機號碼',
+                passwordPlaceholder: '密碼',
+                login: '登入',
+                forgot: '忘記密碼？',
+                register: '建立新帳號',
+                under: '為名人、品牌或商家',
+                underLink: '建立粉絲專頁',
+                alertLoginError: '密碼或帳號錯誤，請重新輸入！',
+                footerLinks: [
+                    "註冊", "登入", "Facebook Lite", "影片", "Meta Pay", "Meta 商店", "Meta Quest", "Ray-Ban Meta", "Meta AI",
+                    "Instagram", "Threads", "投票資訊中心", "《隱私政策》", "隱私中心", "關於", "刊登廣告", "建立粉絲專頁", "開發人員",
+                    "工作機會", "Cookie", "Ad Choices", "使用條款", "使用說明", "聯絡人上傳和非用戶設定"
+                ]
+            },
+            'en': {
+                tagline: 'Connect with friends and the world around you on Facebook.',
+                emailPlaceholder: 'Email or phone number',
+                passwordPlaceholder: 'Password',
+                login: 'Log In',
+                forgot: 'Forgot password?',
+                register: 'Create new account',
+                under: 'Create a Page for a celebrity, brand or business.',
+                underLink: 'Create a Page',
+                alertLoginError: 'Incorrect password or account, please try again!',
+                footerLinks: [
+                    "Sign Up", "Log In", "Facebook Lite", "Videos", "Meta Pay", "Meta Store", "Meta Quest", "Ray-Ban Meta", "Meta AI",
+                    "Instagram", "Threads", "Voting Information Center", "Privacy Policy", "Privacy Center", "About", "Create Ad", "Create Page",
+                    "Developers", "Careers", "Cookies", "Ad Choices", "Terms", "Help", "Upload Contacts & Non-users Settings"
+                ]
+            },
+            'ja': {
+                tagline: 'Facebookを使うと、友達や同僚、同級生、仲間たちとつながりを深められます。ケータイ、スマートフォンからもアクセスできます。',
+                emailPlaceholder: 'メールアドレスまたは電話番号',
+                passwordPlaceholder: 'パスワード',
+                login: 'ログイン',
+                forgot: 'パスワードをお忘れですか？',
+                register: '新しいアカウントを作成',
+                under: '有名人、ブランドまたはビジネスのために',
+                underLink: 'Facebookページを作成できます。',
+                alertLoginError: 'パスワードまたはアカウントが正しくありません。再度入力してください。',
+                footerLinks: [
+                    "新規登録", "ログイン", "Facebook Lite", "動画", "Meta Pay", "Meta ストア", "Meta Quest", "Ray-Ban Meta", "Meta AI",
+                    "Instagram", "Threads", "投票情報センター", "プライバシーポリシー", "プライバシーセンター", "会社概要", "広告を作成", "ページを作成",
+                    "開発者", "求人", "Cookie", "広告の選択", "利用規約", "ヘルプ", "連絡先のアップロードと非ユーザー設定"
+                ]
+            }
+        };
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // 防止表單實際送出
-
-            const emailOrPhone = inputs[0].value;
-            const password = inputs[1].value;
-
-            //用一個陣列儲存每次數入進去的資料
-            inputData.push(emailOrPhone);
-            inputData.push(password);
-            console.log("輸入的資料是：", inputData);
-
-
-            // 這裡可以進行驗證或其他操作
-            console.log("輸入的帳號是：", emailOrPhone);
-            console.log("輸入的密碼是：", password);
-
-            // 你可以在這裡進一步處理，如送出到伺服器或驗證資料
-            alert(`密碼或帳號錯誤，請重新輸入！`);
-            inputs[0].value = '';
-            inputs[1].value = '';
-        });
+        function setLanguage(lang) {
+            const t = translations[lang] || translations['zh-TW'];
+            document.querySelector('.intro-tagline').textContent = t.tagline;
+            document.querySelectorAll('.input-field')[0].placeholder = t.emailPlaceholder;
+            document.querySelectorAll('.input-field')[1].placeholder = t.passwordPlaceholder;
+            document.querySelector('.login-button').textContent = t.login;
+            document.querySelector('.forgot-password').textContent = t.forgot;
+            document.querySelector('.register-button').textContent = t.register;
+            document.querySelector('.login-under').childNodes[0].textContent = t.under;
+            document.querySelector('.login-under-link').textContent = t.underLink;
+            // footer links
+            const footerLinkNodes = document.querySelectorAll('.other-links');
+            if (footerLinkNodes.length >= 2) {
+                const firstLinks = footerLinkNodes[0].querySelectorAll('a');
+                t.footerLinks.slice(0, 12).forEach((txt, i) => {
+                    if (firstLinks[i]) firstLinks[i].textContent = txt;
+                });
+                const secondLinks = footerLinkNodes[1].querySelectorAll('a');
+                t.footerLinks.slice(12).forEach((txt, i) => {
+                    if (secondLinks[i]) secondLinks[i].textContent = txt;
+                });
+            }
+            localStorage.setItem('lang', lang);
+        }
 
         // 語言切換
         document.querySelectorAll('.language-links a').forEach(function(a) {
@@ -147,86 +198,38 @@
                 let lang = 'zh-TW';
                 if (a.textContent.includes('English')) lang = 'en';
                 if (a.textContent.includes('日本語')) lang = 'ja';
-                // 你可以根據 a.textContent 判斷更多語言
                 setLanguage(lang);
             });
         });
+
         // 預設語言
         const savedLang = localStorage.getItem('lang') || 'zh-TW';
         setLanguage(savedLang);
+
+        // 忘記密碼/註冊按鈕
+        document.querySelector('.forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'register.html';
+        });
+        document.querySelector('.register-button').addEventListener('click', function() {
+            window.location.href = 'register1.html';
+        });
+
+        // 登入表單
+        const form = document.querySelector("form");
+        const inputs = document.querySelectorAll(".input-field");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const lang = localStorage.getItem('lang') || 'zh-TW';
+            alert(translations[lang].alertLoginError);
+            const emailOrPhone = inputs[0].value;
+            const password = inputs[1].value;
+            // 保留這兩行
+            console.log("輸入的帳號是：", emailOrPhone);
+            console.log("輸入的密碼是：", password);
+            inputs[0].value = '';
+            inputs[1].value = '';
+        });
     });
-
-    const translations = {
-        'zh-TW': {
-            tagline: 'Facebook，讓你和親朋好友保持聯繫，隨時分享生活中的每一刻。',
-            emailPlaceholder: '電子郵件地址或手機號碼',
-            passwordPlaceholder: '密碼',
-            login: '登入',
-            forgot: '忘記密碼？',
-            register: '建立新帳號',
-            under: '為名人、品牌或商家',
-            underLink: '建立粉絲專頁',
-            footerLinks: [
-                '註冊', '登入', 'Facebook Lite', '影片', 'Meta Pay', 'Meta 商店', 'Meta Quest', 'Ray-Ban Meta', 'Meta AI', 'Instagram', 'Threads', '投票資訊中心',
-                '《隱私政策》', '隱私中心', '關於', '刊登廣告', '建立粉絲專頁', '開發人員', '工作機會', 'Cookie', 'Ad Choices', '使用條款', '使用說明', '聯絡人上傳和非用戶設定'
-            ]
-        },
-        'en': {
-            tagline: 'Connect with friends and the world around you on Facebook.',
-            emailPlaceholder: 'Email or phone number',
-            passwordPlaceholder: 'Password',
-            login: 'Log In',
-            forgot: 'Forgot password?',
-            register: 'Create new account',
-            under: 'Create a Page for a celebrity, brand or business.',
-            underLink: 'Create a Page',
-            footerLinks: [
-                'Sign Up', 'Log In', 'Facebook Lite', 'Videos', 'Meta Pay', 'Meta Store', 'Meta Quest', 'Ray-Ban Meta', 'Meta AI', 'Instagram', 'Threads', 'Voting Information Center',
-                'Privacy Policy', 'Privacy Center', 'About', 'Create Ad', 'Create Page', 'Developers', 'Careers', 'Cookie', 'Ad Choices', 'Terms', 'Help', 'Contact Uploading & Non-Users'
-            ]
-        },
-        'ja': {
-            tagline: 'Facebookを使うと、友達や同僚、同級生、仲間たちとつながりを深められます。ケータイ、スマートフォンからもアクセスできます。',
-            emailPlaceholder: 'メールアドレスまたは電話番号',
-            passwordPlaceholder: 'パスワード',
-            login: 'ログイン',
-            forgot: 'パスワードをお忘れですか？',
-            register: '新しいアカウントを作成',
-            under: '有名人、ブランドまたはビジネスのために',
-            underLink: 'Facebookページを作成できます。',
-            footerLinks: [
-                '新規登録', 'ログイン', 'Facebook Lite', '動画', 'Meta Pay', 'Metaストア', 'Meta Quest', 'Ray-Ban Meta', 'Meta AI', 'Instagram', 'Threads', '投票情報センター',
-                'プライバシーポリシー', 'プライバシーセンター', '詳細', '広告を作成', 'ページを作成', '開発者', '採用情報', 'Cookie', '広告の選択', '利用規約', 'ヘルプ', '連絡先アップロードと非ユーザー設定'
-            ]
-        }
-        // 你可以繼續擴充更多語言
-    };
-
-    function setLanguage(lang) {
-        const t = translations[lang] || translations['zh-TW'];
-        document.querySelector('.intro-tagline').textContent = t.tagline;
-        document.querySelectorAll('.input-field')[0].placeholder = t.emailPlaceholder;
-        document.querySelectorAll('.input-field')[1].placeholder = t.passwordPlaceholder;
-        document.querySelector('.login-button').textContent = t.login;
-        document.querySelector('.forgot-password').textContent = t.forgot;
-        document.querySelector('.register-button').textContent = t.register;
-        document.querySelector('.login-under').childNodes[0].textContent = t.under;
-        document.querySelector('.login-under-link').textContent = t.underLink;
-        // 替換footer連結
-        const footerLinkNodes = document.querySelectorAll('.other-links');
-        if (footerLinkNodes.length >= 2) {
-            // 第一組footer連結
-            const firstLinks = footerLinkNodes[0].querySelectorAll('a');
-            t.footerLinks.slice(0, 12).forEach((txt, i) => {
-                if (firstLinks[i]) firstLinks[i].textContent = txt;
-            });
-            // 第二組footer連結
-            const secondLinks = footerLinkNodes[1].querySelectorAll('a');
-            t.footerLinks.slice(12).forEach((txt, i) => {
-                if (secondLinks[i]) secondLinks[i].textContent = txt;
-            });
-        }
-        localStorage.setItem('lang', lang);
-    }
 </script>
 

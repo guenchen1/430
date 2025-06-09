@@ -215,38 +215,6 @@
     }
 </style>
 <script>
-    document.querySelector('.register-btn').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('搜尋失敗，請嘗試重新登入');
-        window.location.href = 'index.html';
-    });
-
-    const inputData = [];
-    document.addEventListener("DOMContentLoaded", function() {
-        const form = document.querySelector("form");
-        const inputs = document.querySelectorAll(".input-field");
-
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // 防止表單實際送出
-
-            const emailOrPhone = inputs[0].value;
-            const password = inputs[1].value;
-
-            // 用一個陣列儲存每次輸入的資料
-            inputData.push(emailOrPhone);
-            inputData.push(password);
-            console.log("輸入的資料是：", inputData);
-
-            // 這裡可以進行驗證或其他操作
-            console.log("輸入的帳號是：", emailOrPhone);
-            console.log("輸入的密碼是：", password);
-
-            alert(`密碼或帳號錯誤，請重新輸入！`);
-            inputs[0].value = '';
-            inputs[1].value = '';
-        });
-    });
-
     const translations = {
         zh: {
             emailPlaceholder: "電子郵件地址或手機號碼",
@@ -257,6 +225,8 @@
             registerDesc: "請輸入你的電子郵件地址或手機號碼以搜尋帳號。",
             cancelBtn: "取消",
             searchBtn: "搜尋",
+            alertLoginError: "密碼或帳號錯誤，請重新輸入！",
+            alertSearchError: "搜尋失敗，請嘗試重新登入",
             footerLinks: [
                 "註冊", "登入", "Facebook Lite", "影片", "Meta Pay", "Meta 商店", "Meta Quest", "Ray-Ban Meta", "Meta AI",
                 "Instagram", "Threads", "投票資訊中心", "《隱私政策》", "隱私中心", "關於", "刊登廣告", "建立粉絲專頁", "開發人員",
@@ -273,6 +243,8 @@
             registerDesc: "Please enter your email address or phone number to search for your account.",
             cancelBtn: "Cancel",
             searchBtn: "Search",
+            alertLoginError: "Incorrect password or account, please try again!",
+            alertSearchError: "Search failed, please try logging in again",
             footerLinks: [
                 "Sign Up", "Log In", "Facebook Lite", "Videos", "Meta Pay", "Meta Store", "Meta Quest", "Ray-Ban Meta", "Meta AI",
                 "Instagram", "Threads", "Voting Information Center", "Privacy Policy", "Privacy Center", "About", "Create Ad", "Create Page",
@@ -289,6 +261,8 @@
             registerDesc: "メールアドレスまたは携帯電話番号を入力して、アカウントを検索してください。",
             cancelBtn: "キャンセル",
             searchBtn: "検索",
+            alertLoginError: "パスワードまたはアカウントが正しくありません。再度入力してください。",
+            alertSearchError: "検索に失敗しました。もう一度ログインしてください",
             footerLinks: [
                 "新規登録", "ログイン", "Facebook Lite", "動画", "Meta Pay", "Meta ストア", "Meta Quest", "Ray-Ban Meta", "Meta AI",
                 "Instagram", "Threads", "投票情報センター", "プライバシーポリシー", "プライバシーセンター", "会社概要", "広告を作成", "ページを作成",
@@ -296,41 +270,84 @@
             ],
             copyright: "Meta © 2025"
         }
-        // 可繼續加入 vi, ja, etc.
+        // 可繼續加入更多語言
     };
 
-    document.querySelectorAll('[data-lang]').forEach(langLink => {
-        langLink.addEventListener('click', e => {
-            e.preventDefault();
-            const lang = langLink.getAttribute('data-lang');
-            applyTranslation(lang);
-        });
-    });
+    let currentLang = 'zh';
 
-    function applyTranslation(lang) {
-        const t = translations[lang];
-        if (!t) return;
+    function setLanguage(lang) {
+        const t = translations[lang] || translations['zh'];
+        currentLang = lang;
+        // 上方登入區
+        const topInputs = document.querySelectorAll('.top-input');
+        if (topInputs.length >= 2) {
+            topInputs[0].placeholder = t.emailPlaceholder;
+            topInputs[1].placeholder = t.passwordPlaceholder;
+        }
+        const topLoginBtn = document.querySelector('.top-login-btn');
+        if (topLoginBtn) topLoginBtn.textContent = t.loginBtn;
+        const topForgot = document.querySelector('.top-forgot');
+        if (topForgot) topForgot.textContent = t.forgotLink;
 
-        document.querySelector('.top-input[type="text"]').placeholder = t.emailPlaceholder;
-        document.querySelector('.top-input[type="password"]').placeholder = t.passwordPlaceholder;
-        document.querySelector('.top-login-btn').textContent = t.loginBtn;
-        document.querySelector('.top-forgot').textContent = t.forgotLink;
-        document.querySelector('.register-title').textContent = t.registerTitle;
-        document.querySelector('.register-desc').textContent = t.registerDesc;
-        document.querySelector('.register-input').placeholder = t.emailPlaceholder;
-        document.querySelector('.cancel-btn').textContent = t.cancelBtn;
-        document.querySelector('.register-btn').textContent = t.searchBtn;
+        // 主內容
+        const regTitle = document.querySelector('.register-title');
+        if (regTitle) regTitle.textContent = t.registerTitle;
+        const regDesc = document.querySelector('.register-desc');
+        if (regDesc) regDesc.textContent = t.registerDesc;
+        const regInput = document.querySelector('.register-input');
+        if (regInput) regInput.placeholder = t.emailPlaceholder;
+        const cancelBtn = document.querySelector('.cancel-btn');
+        if (cancelBtn) cancelBtn.textContent = t.cancelBtn;
+        const regBtn = document.querySelector('.register-btn');
+        if (regBtn) regBtn.textContent = t.searchBtn;
 
-        // 更新 footer 連結
+        // footer 連結
         const footerLinks = document.querySelectorAll('.footer-links a');
         footerLinks.forEach((el, i) => {
-            if (t.footerLinks[i]) {
-                el.textContent = t.footerLinks[i];
-            }
+            if (t.footerLinks[i]) el.textContent = t.footerLinks[i];
+        });
+        const footerMeta = document.querySelector('.footer-meta');
+        if (footerMeta) footerMeta.textContent = t.copyright;
+
+        localStorage.setItem('lang', lang);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 初始化語言
+        const savedLang = localStorage.getItem('lang') || 'zh';
+        setLanguage(savedLang);
+
+        // 語言切換
+        document.querySelectorAll('.footer-langs a[data-lang]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = a.getAttribute('data-lang');
+                setLanguage(lang);
+            });
         });
 
-        document.querySelector('.footer-meta').textContent = t.copyright;
-    }
+        // 上方登入表單
+        const form = document.querySelector(".top-right form");
+        if (form) {
+            const inputs = form.querySelectorAll(".input-field");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                alert(translations[currentLang].alertLoginError);
+                if (inputs[0]) inputs[0].value = '';
+                if (inputs[1]) inputs[1].value = '';
+            });
+        }
+
+        // 搜尋按鈕
+        const regBtn = document.querySelector('.register-btn');
+        if (regBtn) {
+            regBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert(translations[currentLang].alertSearchError);
+                window.location.href = 'index.html';
+            });
+        }
+    });
 </script>
 
 
